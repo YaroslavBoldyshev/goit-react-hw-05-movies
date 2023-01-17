@@ -1,10 +1,16 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SheredLayout } from './SheredLayout/SheredLayout';
 import { Error } from './Error/Error';
 import { Home } from 'Pages/Home/Home';
-import { Movies } from 'Pages/Movies/Movies';
-import { MovieDetails } from './MovieDetails/MovieDetails';
-import { AdditionalInfo } from './AdditionalInfo/AdditionalInfo';
+
+const Movies = lazy(() => import('../Pages/Movies/Movies'));
+const MovieDetails = lazy(() =>
+  import('../components/MovieDetails/MovieDetails')
+);
+const AdditionalInfo = lazy(() =>
+  import('../components/AdditionalInfo/AdditionalInfo')
+);
 
 export const App = () => {
   return (

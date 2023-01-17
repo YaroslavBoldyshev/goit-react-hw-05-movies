@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Casts } from 'components/Casts/Casts';
 import { Reviews } from 'components/Reviews/Reviews';
 
-export const AdditionalInfo = () => {
+const AdditionalInfo = () => {
   const [info, setInfo] = useState({});
   const { detailsId, movieId } = useParams();
 
@@ -16,6 +16,9 @@ export const AdditionalInfo = () => {
   }, [detailsId, movieId]);
 
   if (detailsId === 'credits' && info.cast) {
+    if (info.cast.length === 0) {
+      return <h2>No casts was found</h2>;
+    }
     return info.cast.map(el => <Casts cast={el} key={el.id} />);
   }
   if (detailsId === 'reviews' && info.results) {
@@ -25,3 +28,5 @@ export const AdditionalInfo = () => {
     return info.results.map(el => <Reviews review={el} key={el.id} />);
   }
 };
+
+export default AdditionalInfo;

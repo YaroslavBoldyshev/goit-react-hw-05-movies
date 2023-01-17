@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink, Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 
 export const SheredLayout = () => {
   return (
@@ -12,7 +13,10 @@ export const SheredLayout = () => {
           <Link to="/movies">Movies</Link>
         </nav>
       </Header>
-      <Outlet />
+
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

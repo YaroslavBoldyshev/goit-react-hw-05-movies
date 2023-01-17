@@ -3,7 +3,7 @@ import { useLocation, useParams, Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMemo } from 'react';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
@@ -24,7 +24,7 @@ export const MovieDetails = () => {
   }
   return (
     <>
-      <Link to={`${sevedLocation.state.from}`}>← Go back</Link>
+      <Link to={`${sevedLocation.state?.from ?? '/'}`}>← Go back</Link>
       {movie && (
         <>
           <MainInfo>
@@ -52,6 +52,8 @@ export const MovieDetails = () => {
     </>
   );
 };
+
+export default MovieDetails;
 
 const MainInfo = styled.div`
   display: flex;
