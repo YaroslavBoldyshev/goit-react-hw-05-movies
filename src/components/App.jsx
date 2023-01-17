@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { SheredLayout } from './SheredLayout/SheredLayout';
 import { Error } from './Error/Error';
 import { Home } from 'Pages/Home/Home';

@@ -1,8 +1,7 @@
-import styled from 'styled-components';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { SearchResults } from 'components/SearchResults/SearchResults';
 import { useState, useEffect } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
   const [searchResult, setSearchResult] = useState([]);

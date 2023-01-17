@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export const Home = () => {
   const [trending, setTrending] = useState([]);

@@ -10,6 +10,7 @@ export const MovieDetails = () => {
 
   const sevedLocation = useMemo(() => {
     return location;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
