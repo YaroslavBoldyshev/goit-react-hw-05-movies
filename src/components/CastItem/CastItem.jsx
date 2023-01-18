@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-export const Casts = ({ cast }) => {
+export const CastItem = ({ cast }) => {
+  const photoSrc =
+    cast.profile_path && `https://image.tmdb.org/t/p/w500/${cast.profile_path}`;
+
   return (
     <Item>
-      <img
-        width="100"
-        src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
-        alt=""
-      />
+      <img width="100" src={photoSrc ?? ``} alt="" />
       <p>{cast.name}</p>
       <p>{cast.character || 'unknown'}</p>
     </Item>
   );
 };
 
-Casts.propTypes = {
+CastItem.propTypes = {
   cast: PropTypes.object,
 };
 

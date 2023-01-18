@@ -1,23 +1,19 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { fetchtTrendingMovies } from 'services/Api';
 
 export const Home = () => {
   const [trending, setTrending] = useState([]);
-  // const [savedLocation, setSavedLocation] = useState('');
   const location = useLocation();
 
-  // console.log(location.pathname + location.search);
-  // useMemo(() => {
-  //   setSavedLocation(location);
-  // }, []);
-
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=a993acaefbe45c7033feacc337f4a924`
-    )
-      .then(p => p.json())
-      .then(p => setTrending(p.results));
+    async function getTrendingMovies() {
+      const result = await fetchtTrendingMovies();
+      setTrending(result);
+    }
+
+    getTrendingMovies();
   }, []);
   return (
     <>

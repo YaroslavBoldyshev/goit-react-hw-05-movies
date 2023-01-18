@@ -2,6 +2,7 @@ import { SearchBar } from 'components/SearchBar/SearchBar';
 import { SearchResults } from 'components/SearchResults/SearchResults';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { fetchtMoviesByName } from 'services/Api';
 
 const Movies = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -12,11 +13,12 @@ const Movies = () => {
     if (!filter) {
       return;
     }
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=a993acaefbe45c7033feacc337f4a924&query=${filter}`
-    )
-      .then(p => p.json())
-      .then(p => setSearchResult(p.results));
+    async function getReviews(filter) {
+      const result = await fetchtMoviesByName(filter);
+      setSearchResult(result);
+    }
+
+    getReviews(filter);
   }, [filter]);
 
   const onSubmit = value => {
@@ -27,6 +29,9 @@ const Movies = () => {
     <>
       <SearchBar onSubmit={onSubmit} />
       <SearchResults movies={searchResult} />
+      {filter && searchResult.length === 0 && (
+        <h1 style={{ margin: '15px' }}>No results...</h1>
+      )}
     </>
   );
 };

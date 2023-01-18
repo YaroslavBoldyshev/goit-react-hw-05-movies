@@ -2,15 +2,14 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SheredLayout } from './SheredLayout/SheredLayout';
 import { Error } from './Error/Error';
-import { Home } from 'Pages/Home/Home';
+import { Home } from 'pages/Home/Home';
 
-const Movies = lazy(() => import('../Pages/Movies/Movies'));
+const Movies = lazy(() => import('../pages/Movies/Movies'));
 const MovieDetails = lazy(() =>
   import('../components/MovieDetails/MovieDetails')
 );
-const AdditionalInfo = lazy(() =>
-  import('../components/AdditionalInfo/AdditionalInfo')
-);
+const Cast = lazy(() => import('../components/Cast/Cast'));
+const Reviews = lazy(() => import('../components/Reviews/Reviews'));
 
 export const App = () => {
   return (
@@ -19,7 +18,8 @@ export const App = () => {
         <Route index element={<Home />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:movieId" element={<MovieDetails />}>
-          <Route path=":detailsId" element={<AdditionalInfo />} />
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Route>

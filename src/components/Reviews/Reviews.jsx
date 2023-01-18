@@ -1,19 +1,28 @@
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { ReviewItem } from 'components/ReviewItem/ReviewItem';
+import { fetchReviews } from 'services/Api';
 
-export const Reviews = ({ review }) => {
+const Reviews = () => {
+  const [reviews, setReviews] = useState(null);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    async function getReviews(movieId) {
+      const result = await fetchReviews(movieId);
+      setReviews(result);
+    }
+
+    getReviews(movieId);
+  }, [movieId]);
+
   return (
-    <Item>
-      <h3>{review.author}</h3>
-      <p>{review.content}</p>
-    </Item>
+    <ul>
+      {reviews &&
+        reviews.results?.map(el => <ReviewItem review={el} key={el.id} />)}
+      {reviews && reviews.results.length === 0 && <h2>No reviews was found</h2>}
+    </ul>
   );
 };
 
-Reviews.propTypes = {
-  review: PropTypes.object,
-};
-
-const Item = styled.li`
-  padding-left: 16px;
-`;
+export default Reviews;

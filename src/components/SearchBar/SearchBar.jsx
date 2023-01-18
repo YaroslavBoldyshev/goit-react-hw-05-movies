@@ -36,9 +36,19 @@ const Form = styled.form`
 
 const Input = styled.input`
   height: 24px;
+  border: 1px solid black;
+  background-color: #fff2f2;
 `;
 
 const Button = styled.button`
-  height: 30px;
+  height: 28px;
   width: 70px;
+  border: 1px solid black;
+  background-color: pink;
+  text-decoration: none;
+  font-weight: 500;
+  transition-duration: 250ms;
+  :hover {
+    background-color: #ffe6e6;
+  }
 `;

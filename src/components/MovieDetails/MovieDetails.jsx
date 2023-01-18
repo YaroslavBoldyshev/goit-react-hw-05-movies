@@ -1,7 +1,14 @@
 import styled from 'styled-components';
-import { useLocation, useParams, Link, Outlet } from 'react-router-dom';
+import {
+  useLocation,
+  useParams,
+  Link,
+  Outlet,
+  NavLink,
+} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMemo } from 'react';
+import { fetchtMovieDetails } from 'services/Api';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -14,17 +21,22 @@ const MovieDetails = () => {
   }, []);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=a993acaefbe45c7033feacc337f4a924`
-    )
-      .then(p => p.json())
-      .then(p => setMovie(p));
+    async function getMovieDetails(movieId) {
+      const result = await fetchtMovieDetails(movieId);
+      setMovie(result);
+    }
+
+    getMovieDetails(movieId);
   }, [movieId]);
-  if (movie) {
+
+  if (!movie) {
+    return;
   }
   return (
     <>
-      <Link to={`${sevedLocation.state?.from ?? '/'}`}>← Go back</Link>
+      <GoBackBtn to={`${sevedLocation.state?.from ?? '/'}`}>
+        ← Go back
+      </GoBackBtn>
       {movie && (
         <>
           <MainInfo>
@@ -43,7 +55,7 @@ const MovieDetails = () => {
           </MainInfo>
           <AdditionalInfo>
             <h3>Additional Info</h3>
-            <Link to="credits">Cast</Link>
+            <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
           </AdditionalInfo>
           <Outlet />
@@ -76,4 +88,22 @@ const AdditionalInfo = styled.div`
   flex-direction: column;
   padding: 10px;
   border-bottom: 1px solid black;
+`;
+
+const GoBackBtn = styled(NavLink)`
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 0 10px;
+  height: 30px;
+  width: 140px;
+  border-radius: 5px;
+  background-color: pink;
+  text-decoration: none;
+  font-weight: 500;
+  transition-duration: 250ms;
+  :hover {
+    background-color: #ffe6e6;
+  }
 `;

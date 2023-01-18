@@ -27,12 +27,14 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   box-shadow: 0 3px 8px grey;
+  background-color: #fff5f5;
 `;
 const Link = styled(NavLink)`
   padding: 16px;
   text-decoration: none;
   color: black;
   font-weight: 500;
+  transition-duration: 250ms;
   &.active {
     color: pink;
   }
