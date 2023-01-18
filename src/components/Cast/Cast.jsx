@@ -19,7 +19,7 @@ const Cast = () => {
   return (
     <ul>
       {cast && cast.cast?.map(el => <CastItem cast={el} key={el.id} />)}
-      {!cast && <h2>No casts was found</h2>}
+      {cast && cast.results.length === 0 && <h2>No casts was found</h2>}
     </ul>
   );
 };
