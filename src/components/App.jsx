@@ -2,9 +2,9 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SheredLayout } from './SheredLayout/SheredLayout';
 import { Error } from './Error/Error';
-import { Home } from 'pages/Home/Home';
+import { Home } from 'Pages/Home/Home';
 
-const Movies = lazy(() => import('../pages/Movies/Movies'));
+const Movies = lazy(() => import('../Pages/Movies/Movies'));
 const MovieDetails = lazy(() =>
   import('../components/MovieDetails/MovieDetails')
 );
